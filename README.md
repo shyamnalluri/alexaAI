@@ -1,4 +1,4 @@
-# alexaAI
+# alexaAI Project
 - To install Required libraries
 - Step1 - Install Python and Pycharm (IDE)
 - Step 2 - Install pip
