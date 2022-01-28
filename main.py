@@ -37,13 +37,14 @@ def Main():
             print('Voice Assistant:', answer)
             talk(answer)
 
+        #This will execute when you ask question How are you
         elif 'how are you' in question:
             print("Human:", question)
             answer = ('I am doing good, how are you dear')
             talk(answer)
             print('Voice Assistant:', answer)
 
-
+        #To play songs in youtube just say "play song_name"
         elif 'play' in question:
             print("Human:", question)
             question = question.replace('play', '')
@@ -62,28 +63,22 @@ def Main():
             print(time)
             talk(time)
 
-
-        elif 'joke' in question:
-            print("Human:", question)
-            joke = pyjokes.get_joke()
-            print(pyjokes.get_joke())
-
-
         elif 'age' in question:
             print("Human:", question)
-            question = question.replace('age', '')
-            answer = ('Why do you want my age fuckig bitch')
+            #question = question.replace('age', '')
+            print("I don't know my age,but I was created on 27/01/2022")
+            answer = ("I don't know my age,but I was created on 27/01/2022")
             talk(answer)
 
-        elif 'what does' in question:
+        elif 'what does cat say' in question:
             print("Human:", question)
-            question = question.replace('what does', '')
-            answer = ('nani')
+            #question = question.replace('what does', '')
+            answer = ('meoww')
             talk(answer)
 
         elif 'weather' in question:
-            print("Human:", question)
-            question = question.replace('weather', '')
+            print("#Human:", question)
+            #question = question.replace('weather', '')
             answer = get_weather('london')
             talk(answer)
 
@@ -96,7 +91,7 @@ def Main():
             return "Good Bye"
 
     except sr.UnknownValueError:
-        answer = "Since No response from you, Good bye for now"
+        answer = "Are you there"
         print("Since No Response from you, Good bye for now")
         talk(answer)
         return False
