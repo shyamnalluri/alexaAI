@@ -1,8 +1,8 @@
-# alexaAI
-#To install Required libraries
-Step1 - Install Python and Pycharm (IDE)
-Step 2 - Install pip
-Step 3 Install required libraries using Pip
+# alexaAI Project
+- To install Required libraries
+- Step1 - Install Python and Pycharm (IDE)
+- Step 2 - Install pip
+- Step 3 Install required libraries using Pip
 - pip install SpeechRecognition 
 - - https://pypi.org/project/SpeechRecognition/
 - pip install pyttsx3
