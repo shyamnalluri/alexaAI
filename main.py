@@ -7,8 +7,6 @@ import pywhatkit
 import wikipedia
 from datetime import datetime
 import pyjokes
-from Py_Weather import get_weather
-
 
 def talk(answer):
     engine = pyttsx3.init()
@@ -17,61 +15,112 @@ def talk(answer):
     engine.say(answer)
     engine.runAndWait()
 
-r = sr.Recognizer()
+def processquestion(question):
 
-with sr.Microphone() as source:
-    print('Hello, How can I help!')
-    audio = r.listen(source)
+    if 'what are you doing' in question:
+        print("Human:", question)
+        answer = ('I am waiting for your question')
+        print('Voice Assistant:', answer)
+        talk(answer)
+        return True
 
-try:
-    #print(r.recognize_google(audio))
-    question = r.recognize_google(audio)
-    if 'Alexa' in question:
-        question = question.replace('Alexa','')
-        #print(question)
-        if 'what are you doing' in question:
-            answer = ('I am waiting for your question')
-            talk(answer)
+    elif 'how are you' in question:
+        print("Human:", question)
+        answer = ('I am doing good, how are you dear')
+        talk(answer)
+        print('Voice Assistant:', answer)
+        return True
 
-        elif 'how are you' in question:
-            answer = ('I am doing good, how are you dear')
-            talk(answer)
+    elif 'play' in question:
+        print("Human:", question)
+        question = question.replace('play', '')
+        pywhatkit.playonyt(question)
+        return True
 
-        elif 'play' in question:
-            question = question.replace('play','')
-            pywhatkit.playonyt(question)
+    elif 'tell me about' in question:
+        print("Human:", question)
+        question = question.replace('tell me about', '')
+        wiki = wikipedia.summary(question, 1)
+        print(wiki)
+        talk(wiki)
+        return True
 
-        elif 'tell me about' in question:
-            question = question.replace('tell me about','')
-            wiki = wikipedia.summary(question,1)
-            print(wiki)
-            talk(wiki)
+    elif 'time' in question:
+        print("Human:", question)
+        time = datetime.today().time().strftime('%I:%M %p')
+        print(time)
+        talk(time)
+        return True
 
-        elif 'time' in question:
-            time = datetime.today().time().strftime('%I:%M %p')
-            print(time)
-            talk(time)
+    elif 'joke' in question:
+        print("Human:", question)
+        joke = pyjokes.get_joke()
+        print(pyjokes.get_joke())
+        return True
 
-        elif 'joke' in question:
-            joke = pyjokes.get_joke()
-            print(pyjokes.get_joke())
+    elif 'age' in question:
+        print("Human:", question)
+        question = question.replace('age', '')
+        answer = ('Why do you want my age fuckig bitch')
+        talk(answer)
+        return True
 
-        elif 'age' in question:
-            question = question.replace('age','')
-            answer = ('Why do you want my age fuckig bitch')
-            talk(answer)
+    elif 'what does' in question:
+        print("Human:", question)
+        question = question.replace('what does', '')
+        answer = ('nani')
+        talk(answer)
+        return True
 
-        elif 'what does' in question:
-            question = question.replace('what does','')
-            answer = ('nani')
-            talk(answer)
+    elif 'weather' in question:
+        print("Human:", question)
+        question = question.replace('weather', '')
+        answer = get_weather('london')
+        talk(answer)
+        return True
 
-        elif 'weather' in question:
-            question = question.replace('weather','')
-            answer = get_weather('london')
-            talk(answer)
     else:
-        print('Sorry, Are you talking to me?')
+        question = r.recognize_google(audio)
+        print("Voice Assistant: sorry,I can't find answer to", question)
+        answer = ("sorry,I can't find answer to", question, "Good Bye")
+        print("Good Bye")
+        talk(answer)
+        return False
 
-except sr.UnknownValueError:
-    print ("sorry,I can't get your question")
+def getquestion():
+    r = sr.Recognizer()
+
+    with sr.Microphone() as source:
+        answer = 'You are speaking to AI voice assistant, How can I help!'
+        print('Voice Assistant:', answer)
+        talk(answer)
+        print("listening....")
+        audio = r.listen(source)
+
+    try:
+        #print(r.recognize_google(audio))
+        question = r.recognize_google(audio)
+        if 'Alexa' in question:
+            question = question.replace('Alexa','')
+            #print(question)
+            return question
+        else:
+            print("You are not talking to me")
+            return "notwithme"
+
+
+    except sr.UnknownValueError:
+        answer = "Since No response from you, Good bye for now"
+        print("Since No Response from you, Good bye for now")
+        talk(answer)
+        return False
+
+canAskQuestion = True
+while canAskQuestion:
+    question = getquestion()
+    if (question == "notwithme"):
+        talk("Ok,carry on with your friends")
+        print("Ok,carry on with your friends")
+        canaskquestion = False
+    else:
+        processquestion(question)
