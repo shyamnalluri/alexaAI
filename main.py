@@ -1,5 +1,6 @@
 #task1 process voice to text
 #Task2 Process the input and search for answer
+#Please check readme file to see how to install required libraries first
 
 import speech_recognition as sr
 import pyttsx3
