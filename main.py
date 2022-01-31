@@ -70,10 +70,10 @@ def Main():
             answer = ("I don't know my age,but I was created on 27/01/2022")
             talk(answer)
 
-        elif 'what does cat say' in question:
+        elif 'who is' in question:
             print("Human:", question)
             #question = question.replace('what does', '')
-            answer = ('meoww')
+            answer = ('Godha is waste fellow')
             talk(answer)
 
         elif 'weather' in question:
@@ -91,7 +91,7 @@ def Main():
             return "Good Bye"
 
     except sr.UnknownValueError:
-        answer = "Are you there"
+        answer = "Since No Response from you, Good bye for now"
         print("Since No Response from you, Good bye for now")
         talk(answer)
         return False
