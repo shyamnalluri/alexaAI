@@ -68,7 +68,9 @@ def processQuestion(question):
         answer = (question,'is waste fellow')
         talk(answer)
         return True
-
+    elif 'bye' in question:
+        print("bye")
+        return "bye"
     elif 'weather' in question:
         print("#Human:", question)
         # question = question.replace('weather', '')
@@ -89,9 +91,9 @@ def getQuestion():
     r = sr.Recognizer()
 
     with sr.Microphone() as source:
-        #answer = 'You are speaking to AI voice assistant, How can I help!'
+        answer = 'You are speaking to AI voice assistant, How can I help!'
         print('Voice Assistant:')
-        #talk(answer)
+        talk(answer)
         print("listening....")
         audio = r.listen(source)
         try:
@@ -118,6 +120,8 @@ while Askquestion:
         talk("Since, you are not talking to me good bye for now")
         Askquestion = False
     elif (question == "Unknownvalue"):
+        Askquestion = False
+    elif (question == "bye"):
         Askquestion = False
     else:
         Askquestion = processQuestion(question)
