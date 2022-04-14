@@ -3,4 +3,3 @@ pyttsx3
 pywhatkit
 wikipedia
 pipwin
-pyaudio
